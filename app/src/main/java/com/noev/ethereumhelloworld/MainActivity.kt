@@ -1,7 +1,5 @@
 package com.noev.ethereumhelloworld
 
-package com.noev.ethereumhelloworld
-
 import android.databinding.*
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
