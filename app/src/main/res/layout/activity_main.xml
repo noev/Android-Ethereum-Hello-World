@@ -1,70 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical"
-              tools:context="com.example.noev.greeter.MainActivity">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <EditText
-            android:id="@+id/edit_text"
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.noev.ethereumhelloworld.MainActivity" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context="com.example.noev.greeter.MainActivity">
+
+        <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/greeting_hint"/>
+            android:hint="@string/greeting_hint"
+            android:text="@={viewModel.userText}" />
 
-    <Button
-            android:id="@+id/write_button"
+        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="@string/write"/>
+            android:onClick="@{() -> viewModel.writeButtonClicked()}"
+            android:text="@string/write" />
 
-    <Button
-            android:id="@+id/button"
+        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="@string/fetch_value"/>
+            android:onClick="@{() -> viewModel.readButtonClicked()}"
+            android:text="@string/fetch_value" />
 
-    <TextView
-            android:id="@+id/text"
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="@string/smart_contract_value"/>
+            android:text="@{viewModel.textReadFromContract}" />
 
-    <ProgressBar
-            android:id="@+id/progressbar"
+        <ProgressBar
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:indeterminate="true"
-            android:visibility="invisible"/>
+            android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.INVISIBLE}" />
 
-    <TextView
-            android:id="@+id/gas_price_text_view"
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="@string/gas_price"/>
+            android:text="@{String.format(@string/gas_price, viewModel.gasPrice)}" />
 
-    <SeekBar
+        <SeekBar
             android:id="@+id/gas_price_seek_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:max="100"/>
+            android:max="100"
+            android:progress="@={viewModel.gasPrice}" />
 
-    <TextView
-            android:id="@+id/gas_limit_text_view"
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="@string/gas_limit"/>
+            android:text="@{String.format(@string/gas_limit, viewModel.gasLimit)}" />
 
-    <SeekBar
+        <SeekBar
             android:id="@+id/gas_limit_seek_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:max="300000"/>
+            android:max="300000"
+            android:progress="@={viewModel.gasLimit}" />
 
-</LinearLayout>
+    </LinearLayout>
+</layout>
+

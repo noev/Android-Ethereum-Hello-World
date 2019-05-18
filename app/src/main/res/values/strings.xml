@@ -5,5 +5,4 @@
     <string name="write">Write</string>
     <string name="gas_limit">Gas limit:%s</string>
     <string name="gas_price">Gas price:%sGwei</string>
-    <string name="smart_contract_value">Smart contract value</string>
 </resources>
